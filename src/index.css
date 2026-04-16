@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Manrope:wght@200;300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ORLISSE — Warm Gold Luxury Design System */
+
+@layer base {
+  :root {
+    /* Warm luxury palette */
+    --background: 40 14% 98%;
+    --foreground: 160 5% 11%;
+    
+    /* Status bar */
+    --status-bar: 0 0% 0%;
+    --status-bar-foreground: 0 0% 100%;
+    
+    /* Navigation */
+    --nav-background: 40 14% 98%;
+    --nav-foreground: 30 5% 25%;
+    --nav-hover: 40 70% 30%;
+    
+    /* Gold primary */
+    --primary: 43 100% 23%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 43 80% 30%;
+    
+    /* Subtle surfaces */
+    --secondary: 40 14% 96%;
+    --secondary-foreground: 30 5% 25%;
+    
+    --muted: 40 10% 95%;
+    --muted-foreground: 30 10% 40%;
+    
+    --accent: 43 30% 92%;
+    --accent-foreground: 43 100% 23%;
+    
+    --border: 40 10% 88%;
+    --input: 40 10% 88%;
+    --ring: 43 100% 23%;
+    
+    /* Cards and surfaces */
+    --card: 40 14% 98%;
+    --card-foreground: 160 5% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 5% 11%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --radius: 0.25rem;
+    
+    /* Transitions */
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 40 14% 97%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 40 10% 95%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 40 10% 88%;
+    --sidebar-ring: 43 100% 23%;
+  }
+
+  .dark {
+    --background: 30 5% 7%;
+    --foreground: 40 14% 95%;
+    
+    --status-bar: 0 0% 0%;
+    --status-bar-foreground: 0 0% 100%;
+    
+    --nav-background: 30 5% 7%;
+    --nav-foreground: 40 10% 75%;
+    --nav-hover: 43 80% 50%;
+    
+    --primary: 43 80% 50%;
+    --primary-foreground: 30 5% 7%;
+    --primary-hover: 43 80% 40%;
+    
+    --secondary: 30 5% 12%;
+    --secondary-foreground: 40 10% 75%;
+    
+    --muted: 30 5% 15%;
+    --muted-foreground: 40 10% 55%;
+    
+    --accent: 30 10% 15%;
+    --accent-foreground: 43 80% 50%;
+    
+    --border: 30 5% 18%;
+    --input: 30 5% 18%;
+    --ring: 43 80% 50%;
+    
+    --card: 30 5% 7%;
+    --card-foreground: 40 14% 95%;
+    
+    --popover: 30 5% 7%;
+    --popover-foreground: 40 14% 95%;
+    
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Noto Serif', serif;
+  }
+}
+
+@layer utilities {
+  .font-serif-italic {
+    font-family: "Noto Serif", serif;
+    font-style: italic;
+  }
+}
