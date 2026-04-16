@@ -123,7 +123,7 @@ const Index = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-stretch">
               <Link to="/category/earrings" className="md:col-span-7 group overflow-hidden relative aspect-[4/5] md:aspect-auto block min-h-[400px] md:min-h-[600px]">
-                <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src={earringsCollection} alt="Earrings collection" />
+                <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src={earringsCollection} alt="Earrings collection" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 to-transparent" />
                 <div className="absolute bottom-8 left-8 text-white z-20">
                   <h3 className="font-headline text-3xl font-light italic mb-2">Organic Forms</h3>
@@ -132,7 +132,7 @@ const Index = () => {
               </Link>
               <div className="md:col-span-5 flex flex-col gap-6 md:gap-8">
                 <Link to="/category/bracelets" className="group overflow-hidden relative flex-1 aspect-[4/3] md:aspect-auto block min-h-[250px]">
-                  <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src={linkBracelet} alt="Chain collection" />
+                  <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src={linkBracelet} alt="Chain collection" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent" />
                   <div className="absolute bottom-6 left-6 text-white z-20">
                     <h3 className="font-headline text-2xl font-light italic mb-1">Chain Collection</h3>
@@ -140,7 +140,7 @@ const Index = () => {
                   </div>
                 </Link>
                 <Link to="/category/rings" className="group overflow-hidden relative flex-1 aspect-[4/3] md:aspect-auto block min-h-[250px]">
-                  <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src={circularCollection} alt="Circular collection" />
+                  <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src={circularCollection} alt="Circular collection" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent" />
                   <div className="absolute bottom-6 left-6 text-white z-20">
                     <h3 className="font-headline text-2xl font-light italic mb-1">Circular Elements</h3>
