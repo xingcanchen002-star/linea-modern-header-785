@@ -56,7 +56,7 @@ const Index = () => {
             animate={{ scale: 1.05, opacity: 1 }}
             transition={{ duration: 1.8, ease: "easeOut" }}
           >
-            <img className="w-full h-full object-cover object-center" src={heroImage} alt="ORLISSE hero" />
+            <img className="w-full h-full object-cover object-center" src={heroImage} alt="ORLISSE hero" fetchPriority="high" />
           </motion.div>
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/40 via-foreground/15 to-transparent z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent z-10" />
