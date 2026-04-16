@@ -9,10 +9,10 @@ import { useCartStore } from "@/stores/cartStore";
 import { formatShopifyPrice } from "@/lib/shopify";
 import { toast } from "sonner";
 
-import earringsCollection from "@/assets/earrings-collection.png";
-import linkBracelet from "@/assets/link-bracelet.png";
-import heroImage from "@/assets/hero-image.png";
-import circularCollection from "@/assets/circular-collection.png";
+import earringsCollection from "@/assets/earrings-collection.webp";
+import linkBracelet from "@/assets/link-bracelet.webp";
+import heroImage from "@/assets/hero-image.webp";
+import circularCollection from "@/assets/circular-collection.webp";
 import artisanCraftsmanship from "@/assets/artisan-craftsmanship.jpg";
 import foundersPortrait from "@/assets/founders-portrait.jpg";
 

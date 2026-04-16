@@ -12,7 +12,7 @@ import obliqueImage from "@/assets/oblique.jpg";
 import lintelImage from "@/assets/lintel.jpg";
 import shadowlineImage from "@/assets/shadowline.jpg";
 import organicEarring from "@/assets/organic-earring.png";
-import linkBracelet from "@/assets/link-bracelet.png";
+import linkBracelet from "@/assets/link-bracelet.webp";
 
 interface Product {
   id: number;
