@@ -42,7 +42,7 @@ const CartPage = () => {
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-8 space-y-0">
                 {items.map((item) => {
                   const image = item.product.node.images?.edges?.[0]?.node;
@@ -50,39 +50,39 @@ const CartPage = () => {
                   const totalAmount = (parseFloat(item.price.amount) * item.quantity).toFixed(2);
 
                   return (
-                    <div key={item.variantId} className="flex gap-6 py-8 border-b border-border">
-                      <Link to={`/product/${item.product.node.handle}`} className="w-28 h-28 md:w-36 md:h-36 bg-muted/10 overflow-hidden flex-shrink-0">
+                    <div key={item.variantId} className="flex gap-3 md:gap-6 py-5 md:py-8 border-b border-border">
+                      <Link to={`/product/${item.product.node.handle}`} className="w-20 h-20 md:w-36 md:h-36 bg-muted/10 overflow-hidden flex-shrink-0">
                         {image && <img src={image.url} alt={item.product.node.title} className="w-full h-full object-cover" />}
                       </Link>
-                      <div className="flex-1 flex flex-col justify-between">
+                      <div className="flex-1 flex flex-col justify-between min-w-0">
                         <div>
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <p className="text-sm font-light text-muted-foreground">{item.product.node.productType}</p>
-                              <h3 className="text-base font-medium text-foreground">{item.product.node.title}</h3>
+                          <div className="flex justify-between items-start gap-2">
+                            <div className="min-w-0">
+                              <p className="text-[10px] md:text-sm font-light text-muted-foreground uppercase tracking-wider">{item.product.node.productType}</p>
+                              <h3 className="text-sm md:text-base font-medium text-foreground truncate">{item.product.node.title}</h3>
                               {item.variantTitle !== 'Default Title' && (
-                                <p className="text-xs font-light text-muted-foreground mt-1">{item.variantTitle}</p>
+                                <p className="text-[10px] md:text-xs font-light text-muted-foreground mt-0.5">{item.variantTitle}</p>
                               )}
                             </div>
                             <button onClick={() => removeItem(item.variantId)} disabled={isLoading}
-                              className="p-2 text-muted-foreground hover:text-destructive transition-colors">
-                              <Trash2 className="w-4 h-4" />
+                              className="p-1.5 md:p-2 text-muted-foreground hover:text-destructive transition-colors flex-shrink-0">
+                              <Trash2 className="w-3.5 h-3.5 md:w-4 md:h-4" />
                             </button>
                           </div>
                         </div>
-                        <div className="flex justify-between items-end mt-4">
+                        <div className="flex justify-between items-end mt-3 md:mt-4">
                           <div className="flex items-center border border-border">
                             <button onClick={() => updateQuantity(item.variantId, item.quantity - 1)} disabled={isLoading}
-                              className="p-2 hover:bg-muted/50 transition-colors">
+                              className="p-1.5 md:p-2 hover:bg-muted/50 transition-colors">
                               <Minus className="w-3 h-3" />
                             </button>
-                            <span className="px-4 text-sm font-light min-w-[40px] text-center">{item.quantity}</span>
+                            <span className="px-3 md:px-4 text-xs md:text-sm font-light min-w-[32px] md:min-w-[40px] text-center">{item.quantity}</span>
                             <button onClick={() => updateQuantity(item.variantId, item.quantity + 1)} disabled={isLoading}
-                              className="p-2 hover:bg-muted/50 transition-colors">
+                              className="p-1.5 md:p-2 hover:bg-muted/50 transition-colors">
                               <Plus className="w-3 h-3" />
                             </button>
                           </div>
-                          <p className="text-base font-light text-foreground">
+                          <p className="text-sm md:text-base font-light text-foreground">
                             {formatShopifyPrice(totalAmount, currencyCode)}
                           </p>
                         </div>
