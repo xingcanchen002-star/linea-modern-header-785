@@ -50,14 +50,15 @@ const Index = () => {
       <main>
         {/* ═══════════════════════ Cinematic Hero ═══════════════════════ */}
         <section className="relative h-[70vh] md:h-[921px] overflow-hidden flex items-center bg-secondary">
-          <motion.div
-            className="absolute inset-0 z-0"
-            initial={{ scale: 1.15, opacity: 0 }}
-            animate={{ scale: 1.05, opacity: 1 }}
-            transition={{ duration: 1.8, ease: "easeOut" }}
-          >
+          <div className="absolute inset-0 z-0">
             <img className="w-full h-full object-cover object-center" src={heroImage} alt="ORLISSE hero" fetchPriority="high" />
-          </motion.div>
+          </div>
+          <motion.div
+            className="absolute inset-0 z-[1] bg-secondary"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
+            transition={{ duration: 1.8, ease: "easeOut" }}
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/40 via-foreground/15 to-transparent z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent z-10" />
 
