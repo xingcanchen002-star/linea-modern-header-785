@@ -18,7 +18,7 @@ const CustomStar = ({ filled, className }: { filled: boolean; className?: string
   </svg>
 );
 
-const ProductDescription = () => {
+const ProductDescription = ({ productHandle, productTitle }: { productHandle?: string; productTitle?: string }) => {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [isCareOpen, setIsCareOpen] = useState(false);

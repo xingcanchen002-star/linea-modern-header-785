@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ShieldCheck, Truck, RotateCcw, Minus, Plus, Loader2, Heart } from "lucide-react";
+import ReviewProduct from "@/components/product/ReviewProduct";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { useShopifyProduct } from "@/hooks/useShopifyProducts";
