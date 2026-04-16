@@ -33,7 +33,7 @@ const CategoryHeader = ({ category }: CategoryHeaderProps) => {
         </Breadcrumb>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-1.5 md:space-y-3">
         <span className="font-label text-[10px] tracking-[0.2em] uppercase text-primary font-bold block">
           The Signature Series
         </span>

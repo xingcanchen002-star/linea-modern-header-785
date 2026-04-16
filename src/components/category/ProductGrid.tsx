@@ -44,7 +44,7 @@ const ProductGrid = ({ searchQuery }: ProductGridProps) => {
 
   return (
     <section className="w-full px-6 md:px-8 mb-16">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 md:gap-x-8 gap-y-12 md:gap-y-16">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 md:gap-x-8 gap-y-6 md:gap-y-16">
         {products.map((product) => {
           const p = product.node;
           const image = p.images.edges[0]?.node;
