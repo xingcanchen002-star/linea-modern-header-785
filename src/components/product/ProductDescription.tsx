@@ -18,7 +18,7 @@ const CustomStar = ({ filled, className }: { filled: boolean; className?: string
   </svg>
 );
 
-const ProductDescription = () => {
+const ProductDescription = ({ productHandle, productTitle }: { productHandle?: string; productTitle?: string }) => {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [isCareOpen, setIsCareOpen] = useState(false);
@@ -146,67 +146,9 @@ const ProductDescription = () => {
             <ChevronDown className="h-4 w-4" />
           )}
         </Button>
-        {isReviewsOpen && (
-          <div className="pb-6 space-y-6">
-            {/* Review Product Button */}
-            <ReviewProduct />
-
-            {/* Reviews List */}
-            <div className="space-y-6">
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <CustomStar
-                        key={star}
-                        filled={true}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm font-light text-muted-foreground">Sarah M.</span>
-                </div>
-                <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                  "Absolutely stunning earrings! The quality is exceptional and they go with everything. 
-                  The architectural design is so unique and I get compliments every time I wear them."
-                </p>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <CustomStar
-                        key={star}
-                        filled={star <= 4}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm font-light text-muted-foreground">Emma T.</span>
-                </div>
-                <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                  "Beautiful craftsmanship and comfortable to wear all day. The gold plating has held up 
-                  perfectly after months of regular wear. Highly recommend!"
-                </p>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <CustomStar
-                        key={star}
-                        filled={true}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm font-light text-muted-foreground">Jessica R.</span>
-                </div>
-                <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                  "These earrings are a work of art. The minimalist design is elegant and sophisticated. 
-                  Perfect weight and the packaging was beautiful too."
-                </p>
-              </div>
-            </div>
+        {isReviewsOpen && productHandle && productTitle && (
+          <div className="pb-6">
+            <ReviewProduct productHandle={productHandle} productTitle={productTitle} />
           </div>
         )}
       </div>
