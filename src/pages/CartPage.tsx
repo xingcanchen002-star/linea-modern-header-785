@@ -25,19 +25,19 @@ const CartPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-6 px-6 pb-24">
+      <main className="pt-4 md:pt-6 px-4 md:px-6 pb-24">
         <div className="max-w-5xl mx-auto">
-          <div className="py-12 text-center">
-            <h1 className="text-3xl md:text-4xl font-light text-foreground mb-2">Your Shopping Bag</h1>
-            <p className="text-sm font-light text-muted-foreground">
+          <div className="py-6 md:py-12 text-center">
+            <h1 className="text-2xl md:text-4xl font-light text-foreground mb-1">Your Shopping Bag</h1>
+            <p className="text-xs md:text-sm font-light text-muted-foreground">
               {itemCount} {itemCount === 1 ? "item" : "items"}
             </p>
           </div>
 
           {items.length === 0 ? (
-            <div className="text-center py-20 space-y-6">
+            <div className="text-center py-12 md:py-20 space-y-5">
               <p className="text-muted-foreground text-sm font-light">Your shopping bag is currently empty.</p>
-              <Button asChild className="rounded-none h-12 px-10 bg-foreground text-background hover:bg-foreground/90 font-light">
+              <Button asChild className="rounded-none h-11 md:h-12 px-8 md:px-10 bg-foreground text-background hover:bg-foreground/90 font-light text-xs md:text-sm">
                 <Link to="/category/shop">Explore Collection</Link>
               </Button>
             </div>
