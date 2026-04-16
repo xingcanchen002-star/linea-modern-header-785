@@ -1,4 +1,4 @@
-import circularCollection from "@/assets/circular-collection.png";
+import circularCollection from "@/assets/circular-collection.webp";
 import organicEarring from "@/assets/organic-earring.png";
 import { Link } from "react-router-dom";
 

@@ -8,7 +8,7 @@ import pantheonImage from "@/assets/pantheon.jpg";
 import eclipseImage from "@/assets/eclipse.jpg";
 import haloImage from "@/assets/halo.jpg";
 import organicEarring from "@/assets/organic-earring.png";
-import linkBracelet from "@/assets/link-bracelet.png";
+import linkBracelet from "@/assets/link-bracelet.webp";
 
 const allImages = [pantheonImage, organicEarring, eclipseImage, linkBracelet, haloImage];
 
