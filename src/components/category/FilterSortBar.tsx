@@ -34,7 +34,7 @@ const FilterSortBar = ({ filtersOpen, setFiltersOpen, itemCount }: FilterSortBar
 
   return (
     <>
-      <section className="w-full px-6 mb-8 border-b border-border pb-4">
+      <section className="w-full px-6 mb-4 md:mb-8 border-b border-border pb-3 md:pb-4">
         <div className="flex justify-between items-center">
           <p className="text-sm font-light text-muted-foreground">
             {itemCount} items

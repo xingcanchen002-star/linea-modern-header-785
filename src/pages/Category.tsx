@@ -53,8 +53,8 @@ const Category = () => {
         />
 
         {/* Product Type Filter Tabs */}
-        <div className="w-full px-6 md:px-8 mb-6">
-          <div className="flex flex-wrap gap-2 justify-center">
+        <div className="w-full px-6 md:px-8 mb-4 md:mb-6">
+          <div className="flex flex-wrap gap-1.5 md:gap-2 justify-center">
             {productTypes.map((type) => (
               <button
                 key={type.slug}
