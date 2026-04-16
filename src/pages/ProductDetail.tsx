@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ShieldCheck, Truck, RotateCcw, Minus, Plus, Loader2, Heart } from "lucide-react";
 import ReviewProduct from "@/components/product/ReviewProduct";
+import MobileImageCarousel from "@/components/product/MobileImageCarousel";
+import StickyAddToCart from "@/components/product/StickyAddToCart";
+import ImageZoom from "@/components/product/ImageZoom";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { useShopifyProduct } from "@/hooks/useShopifyProducts";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlist } from "@/context/WishlistContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { formatShopifyPrice } from "@/lib/shopify";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -27,9 +30,11 @@ const ProductDetail = () => {
   const addItem = useCartStore(state => state.addItem);
   const cartIsLoading = useCartStore(state => state.isLoading);
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const isMobile = useIsMobile();
   const [quantity, setQuantity] = useState(1);
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [zoomOpen, setZoomOpen] = useState(false);
 
   if (loading) {
     return (
@@ -80,11 +85,12 @@ const ProductDetail = () => {
     <div className="min-h-screen bg-background">
       <Header />
 
-      <main className="pt-6">
+      <main className="pt-4 md:pt-6 pb-20 lg:pb-0">
         <section className="w-full px-6 md:px-8 max-w-screen-2xl mx-auto">
-          <nav className="mb-6">
+          {/* Breadcrumb - smaller on mobile */}
+          <nav className="mb-4 md:mb-6 overflow-x-auto">
             <Breadcrumb>
-              <BreadcrumbList className="font-label text-[10px] tracking-[0.15em] uppercase">
+              <BreadcrumbList className="font-label text-[9px] md:text-[10px] tracking-[0.15em] uppercase flex-nowrap">
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
                     <Link to="/" className="hover:text-primary transition-colors">Home</Link>
@@ -100,60 +106,72 @@ const ProductDetail = () => {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>{product.title}</BreadcrumbPage>
+                  <BreadcrumbPage className="truncate max-w-[150px] md:max-w-none">{product.title}</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </nav>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16">
             {/* Image Gallery */}
             <div className="lg:col-span-7">
-              <div className="space-y-4">
-                {/* Main image */}
-                <div className="aspect-[4/5] bg-secondary overflow-hidden">
-                  {images[currentImageIndex] && (
-                    <img
-                      src={images[currentImageIndex].url}
-                      alt={images[currentImageIndex].altText || product.title}
-                      className="w-full h-full object-cover"
-                    />
+              {isMobile ? (
+                <MobileImageCarousel
+                  images={images}
+                  productTitle={product.title}
+                  onImageClick={(index) => {
+                    setCurrentImageIndex(index);
+                    setZoomOpen(true);
+                  }}
+                />
+              ) : (
+                <div className="space-y-4">
+                  <div
+                    className="aspect-[4/5] bg-secondary overflow-hidden cursor-zoom-in"
+                    onClick={() => setZoomOpen(true)}
+                  >
+                    {images[currentImageIndex] && (
+                      <img
+                        src={images[currentImageIndex].url}
+                        alt={images[currentImageIndex].altText || product.title}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                  </div>
+                  {images.length > 1 && (
+                    <div className="grid grid-cols-4 gap-4">
+                      {images.map((img, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`aspect-square bg-secondary overflow-hidden transition-all ${
+                            index === currentImageIndex ? "ring-2 ring-primary" : "opacity-60 hover:opacity-100"
+                          }`}
+                        >
+                          <img src={img.url} alt={img.altText || ''} className="w-full h-full object-cover" />
+                        </button>
+                      ))}
+                    </div>
                   )}
                 </div>
-                {/* Thumbnails */}
-                {images.length > 1 && (
-                  <div className="grid grid-cols-4 gap-4">
-                    {images.map((img, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentImageIndex(index)}
-                        className={`aspect-square bg-secondary overflow-hidden transition-all ${
-                          index === currentImageIndex ? "ring-2 ring-primary" : "opacity-60 hover:opacity-100"
-                        }`}
-                      >
-                        <img src={img.url} alt={img.altText || ''} className="w-full h-full object-cover" />
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+              )}
             </div>
 
             {/* Product Info */}
-            <div className="lg:col-span-5 lg:sticky lg:top-24 lg:h-fit space-y-8">
-              <div className="space-y-3">
+            <div className="lg:col-span-5 lg:sticky lg:top-24 lg:h-fit space-y-6 lg:space-y-8">
+              <div className="space-y-2">
                 <span className="font-label text-[10px] tracking-[0.2em] uppercase text-primary font-bold">
                   {product.productType || 'Collection'}
                 </span>
-                <h1 className="font-headline text-3xl md:text-4xl italic text-foreground">{product.title}</h1>
-                <p className="font-serif-italic text-2xl text-primary">
+                <h1 className="font-headline text-2xl md:text-4xl italic text-foreground">{product.title}</h1>
+                <p className="font-serif-italic text-xl md:text-2xl text-primary">
                   {formatShopifyPrice(price.amount, price.currencyCode)}
                 </p>
               </div>
 
               {/* Variant selection */}
               {product.options && product.options.length > 0 && product.options[0].name !== 'Title' && (
-                <div className="space-y-4 py-6 border-y border-border">
+                <div className="space-y-4 py-5 border-y border-border">
                   {product.options.map((option) => (
                     <div key={option.name}>
                       <span className="font-label text-[10px] tracking-[0.15em] uppercase text-muted-foreground block mb-3">
@@ -188,7 +206,7 @@ const ProductDetail = () => {
               )}
 
               {/* Quantity and Add to Cart */}
-              <div className="space-y-4">
+              <div className="space-y-3">
                 <div className="flex items-center gap-4">
                   <span className="font-label text-[10px] tracking-[0.15em] uppercase text-muted-foreground">Quantity</span>
                   <div className="flex items-center border border-border">
@@ -206,10 +224,11 @@ const ProductDetail = () => {
                   </div>
                 </div>
 
+                {/* Hidden on mobile since we have sticky bar */}
                 <button
                   onClick={handleAddToCart}
                   disabled={cartIsLoading || !selectedVariant?.availableForSale}
-                  className="w-full py-4 bg-foreground text-background font-label text-[10px] tracking-[0.3em] uppercase hover:bg-primary transition-all duration-500 shadow-xl shadow-foreground/5 disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="hidden lg:flex w-full py-4 bg-foreground text-background font-label text-[10px] tracking-[0.3em] uppercase hover:bg-primary transition-all duration-500 shadow-xl shadow-foreground/5 disabled:opacity-50 items-center justify-center gap-2"
                 >
                   {cartIsLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
                   {selectedVariant?.availableForSale ? 'Add to Selection' : 'Sold Out'}
@@ -228,7 +247,7 @@ const ProductDetail = () => {
                     });
                   }}
                   className={cn(
-                    "w-full py-3.5 border flex items-center justify-center gap-2 font-label text-[10px] tracking-[0.15em] uppercase transition-all",
+                    "w-full py-3 border flex items-center justify-center gap-2 font-label text-[10px] tracking-[0.15em] uppercase transition-all",
                     handle && isInWishlist(handle)
                       ? "bg-primary/5 border-primary text-primary"
                       : "border-border text-foreground hover:bg-secondary"
@@ -240,24 +259,24 @@ const ProductDetail = () => {
               </div>
 
               {/* Value Props */}
-              <div className="grid grid-cols-3 gap-4 py-8 border-y border-border">
-                <div className="text-center space-y-2">
-                  <ShieldCheck className="w-5 h-5 mx-auto text-primary" />
-                  <p className="font-label text-[8px] tracking-[0.15em] uppercase text-muted-foreground">Lifetime Warranty</p>
+              <div className="grid grid-cols-3 gap-3 py-6 border-y border-border">
+                <div className="text-center space-y-1.5">
+                  <ShieldCheck className="w-4 h-4 md:w-5 md:h-5 mx-auto text-primary" />
+                  <p className="font-label text-[7px] md:text-[8px] tracking-[0.12em] uppercase text-muted-foreground">Lifetime Warranty</p>
                 </div>
-                <div className="text-center space-y-2">
-                  <Truck className="w-5 h-5 mx-auto text-primary" />
-                  <p className="font-label text-[8px] tracking-[0.15em] uppercase text-muted-foreground">Insured Shipping</p>
+                <div className="text-center space-y-1.5">
+                  <Truck className="w-4 h-4 md:w-5 md:h-5 mx-auto text-primary" />
+                  <p className="font-label text-[7px] md:text-[8px] tracking-[0.12em] uppercase text-muted-foreground">Insured Shipping</p>
                 </div>
-                <div className="text-center space-y-2">
-                  <RotateCcw className="w-5 h-5 mx-auto text-primary" />
-                  <p className="font-label text-[8px] tracking-[0.15em] uppercase text-muted-foreground">30-Day Returns</p>
+                <div className="text-center space-y-1.5">
+                  <RotateCcw className="w-4 h-4 md:w-5 md:h-5 mx-auto text-primary" />
+                  <p className="font-label text-[7px] md:text-[8px] tracking-[0.12em] uppercase text-muted-foreground">30-Day Returns</p>
                 </div>
               </div>
 
               {/* Description */}
               {product.description && (
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <h3 className="font-label text-[10px] tracking-[0.2em] uppercase text-foreground font-bold">Description</h3>
                   <p className="font-body text-sm text-muted-foreground leading-relaxed">{product.description}</p>
                 </div>
@@ -269,6 +288,25 @@ const ProductDetail = () => {
           </div>
         </section>
       </main>
+
+      {/* Sticky mobile bottom CTA */}
+      {selectedVariant && (
+        <StickyAddToCart
+          price={price}
+          productTitle={product.title}
+          isLoading={cartIsLoading}
+          availableForSale={selectedVariant.availableForSale}
+          onAddToCart={handleAddToCart}
+        />
+      )}
+
+      {/* Image Zoom Modal */}
+      <ImageZoom
+        images={images.map(img => img.url)}
+        initialIndex={currentImageIndex}
+        isOpen={zoomOpen}
+        onClose={() => setZoomOpen(false)}
+      />
 
       <Footer />
     </div>
