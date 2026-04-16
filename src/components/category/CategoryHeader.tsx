@@ -16,8 +16,8 @@ const CategoryHeader = ({ category }: CategoryHeaderProps) => {
   const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1);
 
   return (
-    <section className="w-full px-6 md:px-8 mb-12">
-      <div className="mb-6">
+    <section className="w-full px-6 md:px-8 mb-4 md:mb-8">
+      <div className="mb-3 md:mb-6">
         <Breadcrumb>
           <BreadcrumbList className="font-label text-[10px] tracking-[0.15em] uppercase">
             <BreadcrumbItem>
