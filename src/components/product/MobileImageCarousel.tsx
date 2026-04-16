@@ -19,7 +19,7 @@ const MobileImageCarousel = ({ images, productTitle, onImageClick }: MobileImage
   }, []);
 
   return (
-    <div className="relative -mx-6">
+    <div className="relative">
       {/* Scrollable image strip */}
       <div
         ref={scrollRef}
