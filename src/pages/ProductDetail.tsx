@@ -261,6 +261,9 @@ const ProductDetail = () => {
                   <p className="font-body text-sm text-muted-foreground leading-relaxed">{product.description}</p>
                 </div>
               )}
+
+              {/* Reviews */}
+              <ReviewProduct productHandle={product.handle} productTitle={product.title} />
             </div>
           </div>
         </section>
