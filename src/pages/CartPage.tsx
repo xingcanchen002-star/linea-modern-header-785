@@ -93,28 +93,28 @@ const CartPage = () => {
               </div>
 
               <div className="lg:col-span-4">
-                <div className="bg-muted/20 p-8 space-y-6 sticky top-24">
-                  <h3 className="text-lg font-light text-foreground">Order Summary</h3>
-                  <div className="space-y-3 text-sm font-light">
+                <div className="bg-muted/20 p-5 md:p-8 space-y-4 md:space-y-6 sticky top-24">
+                  <h3 className="text-base md:text-lg font-light text-foreground">Order Summary</h3>
+                  <div className="space-y-2.5 md:space-y-3 text-sm font-light">
                     <div className="flex justify-between text-muted-foreground">
                       <span>Subtotal</span>
                       <span>{formatShopifyPrice(subtotal.toFixed(2), items[0]?.price.currencyCode || 'USD')}</span>
                     </div>
                     <div className="flex justify-between text-muted-foreground">
                       <span>Shipping</span>
-                      <span className="text-xs uppercase tracking-wider">Calculated at checkout</span>
+                      <span className="text-[10px] uppercase tracking-wider">Calculated at checkout</span>
                     </div>
-                    <div className="pt-4 border-t border-border flex justify-between text-foreground font-medium">
+                    <div className="pt-3 md:pt-4 border-t border-border flex justify-between text-foreground font-medium">
                       <span>Total</span>
-                      <span className="text-lg">{formatShopifyPrice(subtotal.toFixed(2), items[0]?.price.currencyCode || 'USD')}</span>
+                      <span className="text-base md:text-lg">{formatShopifyPrice(subtotal.toFixed(2), items[0]?.price.currencyCode || 'USD')}</span>
                     </div>
                   </div>
                   <Button onClick={handleCheckout} disabled={isLoading}
-                    className="w-full h-12 rounded-none bg-foreground text-background hover:bg-foreground/90 font-light">
+                    className="w-full h-11 md:h-12 rounded-none bg-foreground text-background hover:bg-foreground/90 font-light text-xs md:text-sm">
                     {isLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <ExternalLink className="w-4 h-4 mr-2" />}
                     Checkout with Shopify
                   </Button>
-                  <Button variant="outline" asChild className="w-full h-12 rounded-none font-light">
+                  <Button variant="outline" asChild className="w-full h-11 md:h-12 rounded-none font-light text-xs md:text-sm">
                     <Link to="/category/shop">Continue Shopping</Link>
                   </Button>
                 </div>
